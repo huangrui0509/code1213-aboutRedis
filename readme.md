@@ -1,0 +1,3 @@
+使用Redis进行数据的缓存
+页面userLogin.html和loginSuccess.html是使用form表单进行数据的提交，并将查询的数据显示到页面
+页面userByAjax.html是使用ajax的方式实现的，首先，在前台页面显示一个提交的表单，点击提交后，隐藏表单，使用table显示从后台获取的数据

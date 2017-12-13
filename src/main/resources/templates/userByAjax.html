@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+<!-- 导入jQuery -->
+<script th:src="@{webjars/jquery/3.2.1/jquery.js}" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="formDiv">
+	<form >
+		<table border="1px">
+			<tr height="35px">
+				<td width="100px">ID：</td>
+				<td width="200px">
+					<input type="text" name="id" id="id" value="" />
+				</td>
+			</tr>
+			<tr height="35px">
+				<td width="100px">姓名：</td>
+				<td width="200px">
+					<input type="text" name="userName" id="userName" value="" />
+				</td>
+			</tr>
+			<tr height="35px">
+				<td width="100px">email：</td>
+				<td width="200px">
+					<input type="text" name="email" id="email" value="" />
+				</td>
+			</tr>
+			
+			<tr height="35px">
+				<td colspan="2" align="center">
+					<input type="button" id="sub" value="添加" />
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+<table id="tab" border="1px"></table>
+
+
+<script th:line="javascript">
+
+$(function(){
+	$("#sub").click(function(){
+		var user = {
+				"id":$("#id").val(),
+				"userName":$("#userName").val(),
+				"email":$("#email").val(),	
+		}
+		console.info(user);
+		$.ajax({
+			url:'getUserInfoByAjax',
+			type:'post',
+			dataType:'json',
+			data:user,
+			success:function(json){
+				$("#formDiv").empty();
+				var tab=$("#tab");
+				tab.append("<tr ><th>id</th><th>姓名</th><th>email</th></tr>");
+				for(var key in json){
+					var user=json[key];
+					//alert(user);
+					tab.append("<tr><td >"+user.id+"</td><td >"+user.userName+"</td><td >"+user.email+"</td></tr>");
+				}	
+			}
+			
+		});
+	});
+});
+
+</script>
+
+</body>
+</html>
